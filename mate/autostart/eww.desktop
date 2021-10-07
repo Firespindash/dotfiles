@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/lucas/bin/eww open appdock
+Hidden=false
+Name[pt_BR]=appdock
+Name=appdock
+Comment[pt_BR]=Dock bar with apps widget
+Comment=Dock bar with apps
+X-MATE-Autostart-Delay=0

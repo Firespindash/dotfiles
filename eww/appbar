@@ -1,0 +1,111 @@
+#!/bin/bash
+
+if pidof -x "`basename $0`" -o $$ >/dev/null; then
+	exit
+fi
+
+declare image
+path=~/.local/share/eww
+theme=/usr/share/icons/Tela-circle-black
+# theme=$(find /usr/share/icons/ -name $(gsettings get org.gnome.desktop.interface icon-theme | cut -d "'" -f 2))
+if [ -z "$theme" ]; then
+	theme=$(find /home/$USER/.icons/ -name $(gsettings get org.gnome.desktop.interface icon-theme | cut -d "'" -f 2))
+fi
+
+exe_ls() {
+	echo "$1) $1 ;;" >> exec
+}
+
+get_img() {
+	icon="$1"
+	image=$(find "$theme" -name "${icon}.*" 2>/dev/null | awk 'NR == 1{print $1}' 2>/dev/null)
+	if [ -z "$image" ]; then
+		image=$(find /usr/share/icons/ -name "${icon}.*" 2>/dev/null | awk 'NR == 1{print $1}' 2>/dev/null)
+	fi
+	if [ -z "$image" ]; then
+ 		image=$(ls /usr/share/pixmaps/ | grep "${icon}." 2>/dev/null)
+ 	fi
+	if [ -z "$image" ]; then
+		echo 'Icon not found or unexistent.'; exit 1
+	fi
+}
+
+list() {
+	for Arq in `ls $path`; do
+		if [ -n "${Arq##*.desktop*}" ]; then
+			if grep -q ".svg" <<< "$Arq"; then
+				image=$(ls $path/"$Arq")
+			else
+				type=$(file -b --mime-type "$Arq")
+				image=$(locate --limit 1 "$Arq" | grep icons)
+			fi
+			exe="xdg-open $path/$Arq"
+		else
+			img=$(grep "Icon=" $path/"$Arq" | cut -d '=' -f 2)
+			get_img "$img"
+			cmd=$(grep "Exec=" $path/"$Arq" | cut -d '=' -f 2 | awk 'NR == 1{print $1}')
+			exe_ls "$cmd"
+			exe="./exec $cmd"
+		fi
+		cat << EOF >> apps.yuck
+	 (button :style "background-image: url('${image}'); background-repeat: no-repeat;
+	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+	 		 :onclick "${exe}"
+	 		 :onrightclick "./exec appbar")
+EOF
+	done
+}
+
+gen() {
+	cat << EOF > apps.yuck
+(defwidget apps []
+	(box :space-evenly false
+		 :halign "center"
+EOF
+	printf '#!/bin/bash\n\n' > exec
+	printf 'case $1 in\n' >> exec
+	list
+	printf 'appbar) ./appbar ;;\n' >> exec
+	printf 'esac\n' >> exec
+	sed -i "$ s/$/))/" apps.yuck
+}
+
+add() {
+	file=$(kdialog --getopenfilename "/usr/share/applications/" --title "Choose a file to run in the dock: " --geometry 800x540 2> /dev/null)
+	if [ -n "$file" ]; then
+		name=$(basename $file)
+		cp $file $path
+	else
+		exit
+	fi
+
+	if grep -q ".desktop" <<< "$name"; then
+		chown $USER:$USER $path/$name
+		chmod +x $path/$name
+	fi
+	gen
+}
+
+remove() {
+	file=$(kdialog --getopenfilename "${path}/" --title "Choose a file to remove from the dock: " --geometry 800x540 2> /dev/null)
+	if [ -z "$file" ]; then
+		exit
+	fi
+	if grep -q "$path" <<< "$file"; then
+		rm "$file"
+	else
+		kdialog --msgbox "Just files from $path can be removed."
+		exit
+	fi
+	gen
+}
+
+choice=$(kdialog --title "Appdock" --yesno "What action do you want to do?" --yes-label "Add" --no-label "Remove" 2>/dev/null)
+
+if [ $? -eq 0 ]; then
+	add
+elif [ $? -eq 1 ]; then
+	remove
+else
+	exit
+fi

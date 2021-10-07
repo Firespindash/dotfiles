@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=ksuperkey
+Hidden=false
+Name[pt_BR]=Win-key keybinder
+Name=Win-key keybinder
+Comment[pt_BR]=
+Comment=
+X-MATE-Autostart-Delay=0

@@ -1,0 +1,70 @@
+These are instructions on how to install this customization
+It's also recommended that you have installed the apps that are expected to be there in the configs. Mainly compton-tryone and the ones from eww:
+dolphin, alacritty, mpv, gedit, falkon, timeshift and qview.
+
+ Mate: 
+   To restore desktop customized settings.
+   
+   dconf load / < mate/mate-backup 
+   
+   cp mate/marco-compton.conf ~/.config/ 
+   
+   cp -r mate/autostart/ ~/.config/ 
+   cp -r mate/panel/panel2.d/ ~/.config/mate/ 
+
+River-theme:
+   To install River theme.
+   
+   mv River-theme/ ~/.themes/River/ 
+   mv ~/.themes/River/GTK/* ~/.themes/River/ 
+   rm -rf ~/.themes/River/GTK/ 
+   rm -rf ~/.themes/River/dev/ 
+   rm -rf ~/.themes/River/Kvantum/dev/ 
+   rm -rf ~/.themes/River/metacity-1/dev/ 
+   rm -rf ~/.themes/River/extra-assets/dev/ 
+
+Logout-screen: 
+   To install the logout widget.
+   
+   cp -r !(logout-screen/share) logout-screen/ ~/.config/ 
+   
+   mv logout-screen/share/ ~/.local/share/logout-screen/ 
+   rm -rf ~/.local/share/logout-screen/dev/ 
+
+Rofi: 
+   To install rofi app launcher.
+   
+   mv rofi/ ~/.config/rofi/ 
+   
+Eww:
+   To install dock bar of apps, eww widgets.
+   For it, you will need the rust nightly toolchain.
+   
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 
+   rustup default nightly 
+
+   You can get rid of rustup after. 
+
+   git clone https://github.com/elkowar/eww 
+   cd eww/ 
+   cargo build --release 
+   chmod +x target/release/eww 
+   mv target/release/eww ~/bin/eww 
+   
+   And test the bin to see if it's working.
+   
+   cd ../ 
+   mv eww/* ~/.config/eww/ 
+   cp -r !(eww/share) eww/ ~/.config/ 
+   mv eww/share/ ~/.local/share/eww/ 
+
+Wallpaper:
+   To set the nice wallpaper change it to where you want to.
+   After, set it in the Mate Control Center. Example:
+   
+   mv wallpaper/leafs-improved.png ~/Images/wallpapers/ 
+
+Done, now you can even remove this directory.
+
+cd ../ && rm -rf dotfiles/ 
+

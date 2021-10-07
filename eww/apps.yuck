@@ -1,0 +1,31 @@
+(defwidget apps []
+	(box :space-evenly false
+		 :halign "center"
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/system-file-manager.svg'); background-repeat: no-repeat;
+ 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+ 	 		 :onclick "./exec dolphin"
+ 	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/terminal.svg'); background-repeat: no-repeat;
+	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+	 		 :onclick "./exec alacritty"
+	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/mpv.svg'); background-repeat: no-repeat;
+	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+	 		 :onclick "./exec mpv"
+	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/org.gnome.gedit.svg'); background-repeat: no-repeat;
+ 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+ 	 		 :onclick "./exec gedit"
+	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/browser.svg'); background-repeat: no-repeat;
+ 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+ 	 		 :onclick "./exec falkon"
+ 	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/timeshift.svg'); background-repeat: no-repeat;
+ 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+ 	 		 :onclick "./exec timeshift-launcher"
+ 	 		 :onrightclick "./exec appbar")
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/image-viewer.svg'); background-repeat: no-repeat;
+	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
+	 		 :onclick "./exec qview"
+	 		 :onrightclick "./exec appbar")))

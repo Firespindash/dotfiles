@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=/home/lucas/.themes/River/extra-assets/shutdown.png
+Icon[pt_BR]=/home/lucas/.themes/River/extra-assets/shutdown.png
+Name[pt_BR]=Logout splash screen menu
+Exec=/home/lucas/bin/logout.sh
+Name=Logout splash screen menu

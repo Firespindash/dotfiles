@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="cancel">
+    <file>cancel.png</file>
+  </qresource>
+  <qresource prefix="shutdown">
+    <file>shutdown.png</file>
+  </qresource>
+  <qresource prefix="reboot">
+    <file>reboot.png</file>
+  </qresource>
+  <qresource prefix="logout">
+    <file>logout.png</file>
+  </qresource>
+</RCC>

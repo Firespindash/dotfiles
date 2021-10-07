@@ -1,0 +1,8 @@
+<RCC>
+  <qresource>
+    <file>assets/shutdown.png</file>
+    <file>assets/reboot.png</file>
+    <file>assets/logout.png</file>
+    <file>assets/cancel.png</file>
+  </qresource>
+</RCC>

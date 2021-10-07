@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $1 in
+alacritty) alacritty --working-directory ~ ;;
+mpv) mpv ;;
+gedit) gedit ;;
+dolphin) dolphin ;;
+falkon) falkon ;;
+qview) qview ;;
+timeshift-launcher) timeshift-launcher ;;
+appbar) ./appbar ;;
+esac
