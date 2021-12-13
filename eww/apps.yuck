@@ -3,7 +3,7 @@
 		 :halign "center"
 	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/system-file-manager.svg'); background-repeat: no-repeat;
  	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
- 	 		 :onclick "./exec dolphin"
+ 	 		 :onclick "./exec thunar"
  	 		 :onrightclick "./exec appbar")
 	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/terminal.svg'); background-repeat: no-repeat;
 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"

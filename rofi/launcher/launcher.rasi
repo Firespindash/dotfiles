@@ -5,7 +5,6 @@ configuration {
 	display-drun:			"";
 	drun-display-format:	"{name}";
 	disable-history:		true;
-	fullscreen:				true;
 	sidebar-mode:			false;
 }
 
@@ -21,6 +20,7 @@ window {
 	text-color:				@foreground;
 	border:					0px;
 	border-radius:			0px;
+	fullscreen:				true;
 }
 
 prompt {
@@ -58,7 +58,7 @@ listview {
 	background-color:		transparent;
 	columns:				7;
 	lines:					7;
-	spacing:				0%;
+	spacing:				20px;
 	cycle:					true;
 	dynamic:				true;
 	layout:					vertical;
@@ -78,15 +78,19 @@ element {
 	text-color:				@foreground;
 	orientation:			vertical;
 	border-radius:			0%;
-	padding:				2.5% 0% 2.5% 0%;
+	padding:				2.5%;
 }
 
 element-icon {
-	size:					80px;
+	background-color:		transparent;
+	size:					84px;
+	padding:				0% 0% 0% 0.25%;
 	border:					0px;
 }
 
 element-text {
+	background-color:		transparent;
+	text-color:				@foreground;
 	expand:					true;
 	horizontal-align:		0.5;
 	vertical-align:			0.5;
@@ -98,4 +102,8 @@ element selected {
 	text-color:				@foreground;
 	border:					0% 0% 0% 0%;
 	border-radius:			12px;
+}
+
+element, element-text, element-icon, inputbar, entry {
+	cursor: pointer;
 }

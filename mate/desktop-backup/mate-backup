@@ -37,14 +37,14 @@ timeout-enable=false
 togglekeys-enable=false
 
 [desktop/applications/calculator]
-exec='kcalc'
+exec='mate-calc'
 
 [desktop/applications/terminal]
 exec='alacritty'
 
 [desktop/background]
 color-shading-type='solid'
-picture-filename='/home/lucas/Imagens/wallpapers/wallpaper59.png'
+picture-filename='/home/lucas/wallpaper/leafs-improved.png'
 picture-options='stretched'
 primary-color='rgb(255,255,255)'
 secondary-color='rgb(0,0,0)'

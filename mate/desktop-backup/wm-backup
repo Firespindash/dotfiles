@@ -1,0 +1,19 @@
+[general]
+action-double-click-titlebar='toggle_maximize'
+audible-bell=false
+auto-raise=true
+auto-raise-delay=400
+button-layout='menu:minimize,maximize,close'
+focus-mode='sloppy'
+mouse-button-modifier='<Super>'
+num-workspaces=4
+theme='River'
+titlebar-font='Comfortaa 16'
+
+[global-keybindings]
+panel-main-menu='<Mod4>m'
+run-command-screenshot='disabled'
+show-desktop='<Mod4>u'
+
+[window-keybindings]
+toggle-fullscreen='F11'

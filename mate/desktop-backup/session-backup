@@ -1,0 +1,7 @@
+[/]
+auto-save-session=false
+session-start=1634414234
+show-hidden-apps=true
+
+[required-components]
+windowmanager='marco-compton'

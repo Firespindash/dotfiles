@@ -1,19 +1,47 @@
 These are instructions on how to install this customization
 It's also recommended that you have installed the apps that are expected to be there in the configs. Mainly compton-tryone and the ones from eww:
-dolphin, alacritty, mpv, gedit, falkon, timeshift and qview.
+thunar, alacritty, mpv, gedit, falkon, timeshift and qview.
 
- Mate: 
+Mate: 
    To restore desktop customized settings.
    
-   dconf load / < mate/mate-backup 
+   dconf load /org/mate/ < mate/desktop-backup/mate-backup 
    
    cp mate/marco-compton.conf ~/.config/ 
    
    cp -r mate/autostart/ ~/.config/ 
-   cp -r mate/panel/panel2.d/ ~/.config/mate/ 
+   cp -r mate/panel2.d/ ~/.config/mate/ 
+
+Global Menu:
+   To install topmenu on panel.
+
+   pacman -S appmenu-gtk-module
+   
+   yay -S vala-panel-appmenu-registrar-git
+
+   pacman -S cmake
+
+   yay -S vala-panel-appmenu
+   
+   Then, there may be an error to be fixed.
+   
+   cd ~/.cache/yay/vala-panel-appmenu/
+
+   Edit in the PKGBUILD file setting the following:
+   _disable_xfce=false to true
+   _disable_vala=true
+   _disable_budgie=true
+
+   And done:
+   
+   makepkg -si
 
 River-theme:
    To install River theme.
+   
+   Create if it doesn't exist.
+   
+   mkdir ~/.themes/
    
    mv River-theme/ ~/.themes/River/ 
    mv ~/.themes/River/GTK/* ~/.themes/River/ 
@@ -22,13 +50,45 @@ River-theme:
    rm -rf ~/.themes/River/Kvantum/dev/ 
    rm -rf ~/.themes/River/metacity-1/dev/ 
    rm -rf ~/.themes/River/extra-assets/dev/ 
+   
+   Icon theme:
+      First, download the Tela-circle-black.tar.xz in Files(13) on the link:
+      https://www.gnome-look.org/p/1359276/
+
+      And create if it doesn't exist.
+      
+      mkdir ~/.icons/
+
+      mv ~/Downloads/Tela-circle-black.tar.xz ~/.icons/
+      cd ~/.icons/
+      
+      tar -xf Tela-circle-black.tar.xz
+      rm -rf Tela-circle-black.tar.xz
+
+   Cursor theme:
+      To install Deepin cursor theme.
+      
+      git clone https://github.com/linuxdeepin/deepin-cursor-theme.git
+
+      cd deepin-cursor-theme/
+      
+      sudo make
+      
+      cd .. && rm -rf deepin-cursor-theme/
+      
+      And to fix the name of the theme:
+      sed -i 's/Deepin-Cursor/deepin/g' ~/.icons/Deepin-Cursor/cursor.theme
 
 Logout-screen: 
    To install the logout widget.
    
-   cp -r !(logout-screen/share) logout-screen/ ~/.config/ 
+   pacman -S python-pip
    
-   mv logout-screen/share/ ~/.local/share/logout-screen/ 
+   pip install pyqt5
+   
+   cp -r logout-screen/ ~/.config/ 
+   
+   mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ 
    rm -rf ~/.local/share/logout-screen/dev/ 
 
 Rofi: 
@@ -54,9 +114,8 @@ Eww:
    And test the bin to see if it's working.
    
    cd ../ 
-   mv eww/* ~/.config/eww/ 
-   cp -r !(eww/share) eww/ ~/.config/ 
-   mv eww/share/ ~/.local/share/eww/ 
+   cp -r eww/ ~/.config/ 
+   mv ~/.config/eww/share/ ~/.local/share/eww/ 
 
 Wallpaper:
    To set the nice wallpaper change it to where you want to.

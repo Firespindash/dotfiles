@@ -1,0 +1,17 @@
+# A list with other programs I use in my desktop
+
+ranger
+python-ueberzug
+mate-tweak
+deadd-notification-center-bin
+ttf-comfortaa
+terminus-font
+bat
+ksuperkey
+ghostwriter
+zathura
+qBittorrent
+libreoffice
+inkscape
+colorpicker
+

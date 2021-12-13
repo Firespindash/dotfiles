@@ -2,10 +2,11 @@
 
 case $1 in
 alacritty) alacritty --working-directory ~ ;;
+atril) atril ;;
 mpv) mpv ;;
 gedit) gedit ;;
-dolphin) dolphin ;;
 falkon) falkon ;;
+thunar) thunar ~ ;;
 qview) qview ;;
 timeshift-launcher) timeshift-launcher ;;
 appbar) ./appbar ;;

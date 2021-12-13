@@ -1,0 +1,6 @@
+gedit
+gedit-plugins
+gucharmap
+nuspell
+hspell
+libvoikko

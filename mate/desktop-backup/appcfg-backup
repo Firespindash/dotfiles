@@ -1,0 +1,5 @@
+[calculator]
+exec='mate-calc'
+
+[terminal]
+exec='alacritty'
