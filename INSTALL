@@ -1,8 +1,8 @@
 These are instructions on how to install this customization
 It's also recommended that you have installed the apps that are expected to be there in the configs. Mainly compton-tryone and the ones from eww:
-thunar, alacritty, mpv, gedit, falkon, timeshift and qview.
+thunar, alacritty-ligatures, mpv, gedit, falkon, timeshift and qview.
 
-Mate: 
+Mate:
    To restore desktop customized settings.
    
    dconf load /org/mate/ < mate/desktop-backup/mate-backup 
@@ -15,17 +15,17 @@ Mate:
 Global Menu:
    To install topmenu on panel.
 
-   pacman -S appmenu-gtk-module
+   pacman -S appmenu-gtk-module 
    
-   yay -S vala-panel-appmenu-registrar-git
+   yay -S vala-panel-appmenu-registrar-git 
 
-   pacman -S cmake
+   pacman -S cmake 
 
-   yay -S vala-panel-appmenu
+   yay -S vala-panel-appmenu 
    
    Then, there may be an error to be fixed.
    
-   cd ~/.cache/yay/vala-panel-appmenu/
+   cd ~/.cache/yay/vala-panel-appmenu/ 
 
    Edit in the PKGBUILD file setting the following:
    _disable_xfce=false to true
@@ -34,14 +34,14 @@ Global Menu:
 
    And done:
    
-   makepkg -si
+   makepkg -si 
 
 River-theme:
    To install River theme.
    
    Create if it doesn't exist.
    
-   mkdir ~/.themes/
+   mkdir ~/.themes/ 
    
    mv River-theme/ ~/.themes/River/ 
    mv ~/.themes/River/GTK/* ~/.themes/River/ 
@@ -57,41 +57,41 @@ River-theme:
 
       And create if it doesn't exist.
       
-      mkdir ~/.icons/
+      mkdir ~/.icons/ 
 
-      mv ~/Downloads/Tela-circle-black.tar.xz ~/.icons/
-      cd ~/.icons/
+      mv ~/Downloads/Tela-circle-black.tar.xz ~/.icons/ 
+      cd ~/.icons/ 
       
-      tar -xf Tela-circle-black.tar.xz
-      rm -rf Tela-circle-black.tar.xz
+      tar -xf Tela-circle-black.tar.xz 
+      rm -rf Tela-circle-black.tar.xz 
 
    Cursor theme:
       To install Deepin cursor theme.
       
-      git clone https://github.com/linuxdeepin/deepin-cursor-theme.git
+      git clone https://github.com/linuxdeepin/deepin-cursor-theme.git 
 
-      cd deepin-cursor-theme/
+      cd deepin-cursor-theme/ 
       
-      sudo make
+      sudo make 
       
-      cd .. && rm -rf deepin-cursor-theme/
+      cd .. && rm -rf deepin-cursor-theme/ 
       
       And to fix the name of the theme:
-      sed -i 's/Deepin-Cursor/deepin/g' ~/.icons/Deepin-Cursor/cursor.theme
+      sed -i 's/Deepin-Cursor/deepin/g' ~/.icons/Deepin-Cursor/cursor.theme 
 
-Logout-screen: 
+Logout-screen:
    To install the logout widget.
    
-   pacman -S python-pip
+   pacman -S python-pip 
    
-   pip install pyqt5
+   pip install pyqt5 
    
    cp -r logout-screen/ ~/.config/ 
    
    mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ 
    rm -rf ~/.local/share/logout-screen/dev/ 
 
-Rofi: 
+Rofi:
    To install rofi app launcher.
    
    mv rofi/ ~/.config/rofi/ 
@@ -103,7 +103,7 @@ Eww:
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 
    rustup default nightly 
 
-   You can get rid of rustup after. 
+   You can get rid of rustup after.
 
    git clone https://github.com/elkowar/eww 
    cd eww/ 
@@ -122,6 +122,11 @@ Wallpaper:
    After, set it in the Mate Control Center. Example:
    
    mv wallpaper/leafs-improved.png ~/Images/wallpapers/ 
+
+Terminal:
+   To install Alacritty terminal theme.
+
+   mv alacritty/ ~/.config/ 
 
 Done, now you can even remove this directory.
 

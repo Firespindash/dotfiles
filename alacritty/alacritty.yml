@@ -1,0 +1,60 @@
+font:
+    size: 18
+    normal:
+        family: FiraCode
+        style: Regular
+    bold:
+        family: FiraCode
+        style: Bold
+    italic:
+        family: FiraCode
+        style: Italic
+
+cursor:
+    style: 
+        shape: Underline
+        blinking: Always
+
+background_opacity: 0.6
+
+window:
+    dimensions:
+        columns: 90
+        lines: 17
+
+# colors: old theme (Unknown)
+    # primary:
+        # background: '#2e3440'
+        # foreground: '#aaacb1'
+    # normal:
+        # black: '#474f55'
+        # red: '#8d8f90'
+        # green: '#a6aaa6'
+        # yellow: '#aba9b3'
+        # blue: '#b5b9be'
+        # magenta: '#bcbcc2'
+        # cyan: '#676d7e'
+        # white: '#ccd1d1'
+
+colors: # Theme (Nord)
+   primary:
+     background: '#2e3440'
+     foreground: '#d8dee9'
+   normal:
+     black:   '#3b4252'
+     red:     '#bf616a'
+     green:   '#a3be8c'
+     yellow:  '#ebcb8b'
+     blue:    '#81a1c1'
+     magenta: '#b48ead'
+     cyan:    '#88c0d0'
+     white:   '#e5e9f0'
+   bright:
+     black:   '#4c566a'
+     red:     '#bf616a'
+     green:   '#a3be8c'
+     yellow:  '#ebcb8b'
+     blue:    '#81a1c1'
+     magenta: '#b48ead'
+     cyan:    '#8fbcbb'
+     white:   '#eceff4'

@@ -1,4 +1,4 @@
-# A list with other programs I use in my desktop
+# A list with other programs and things I use in my desktop
 
 ranger
 python-ueberzug
@@ -6,6 +6,7 @@ mate-tweak
 deadd-notification-center-bin
 ttf-comfortaa
 terminus-font
+ttf-fira-code
 bat
 ksuperkey
 ghostwriter
@@ -14,4 +15,3 @@ qBittorrent
 libreoffice
 inkscape
 colorpicker
-
