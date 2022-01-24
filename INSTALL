@@ -1,17 +1,7 @@
 These are instructions on how to install this customization
 It's also recommended that you have installed the apps that are expected to be there in the configs. Mainly compton-tryone and the ones from eww:
 thunar, alacritty-ligatures, mpv, gedit, falkon, timeshift and qview.
-
-Mate:
-   To restore desktop customized settings.
-   
-   dconf load /org/mate/ < mate/desktop-backup/mate-backup 
-   
-   cp mate/marco-compton.conf ~/.config/ 
-   
-   cp -r mate/autostart/ ~/.config/ 
-   cp -r mate/panel2.d/ ~/.config/mate/ 
-
+ 
 Global Menu:
    To install topmenu on panel.
 
@@ -35,6 +25,7 @@ Global Menu:
    And done:
    
    makepkg -si 
+   cd ~/dotfiles/ 
 
 River-theme:
    To install River theme.
@@ -65,19 +56,11 @@ River-theme:
       tar -xf Tela-circle-black.tar.xz 
       rm -rf Tela-circle-black.tar.xz 
 
-   Cursor theme:
-      To install Deepin cursor theme.
-      
-      git clone https://github.com/linuxdeepin/deepin-cursor-theme.git 
+      sudo cp -r ~/.icons/Tela-circle-black /usr/share/icons/ 
+      cd ~/dotfiles 
 
-      cd deepin-cursor-theme/ 
-      
-      sudo make 
-      
-      cd .. && rm -rf deepin-cursor-theme/ 
-      
-      And to fix the name of the theme:
-      sed -i 's/Deepin-Cursor/deepin/g' ~/.icons/Deepin-Cursor/cursor.theme 
+   Cursor theme:
+      I use Deepin Dark cursor theme, please look at the extra-deps/extra-pkgs.txt
 
 Logout-screen:
    To install the logout widget.
@@ -101,10 +84,15 @@ Eww:
    For it, you will need the rust nightly toolchain.
    
    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh 
+   
+   And just proceed and reload bash:
+
+   source $HOME/.cargo/env 
    rustup default nightly 
 
    You can get rid of rustup after.
 
+   cd ../ 
    git clone https://github.com/elkowar/eww 
    cd eww/ 
    cargo build --release 
@@ -113,7 +101,7 @@ Eww:
    
    And test the bin to see if it's working.
    
-   cd ../ 
+   cd ~/dotfiles/ 
    cp -r eww/ ~/.config/ 
    mv ~/.config/eww/share/ ~/.local/share/eww/ 
 
@@ -128,7 +116,16 @@ Terminal:
 
    mv alacritty/ ~/.config/ 
 
+Mate:
+   To restore desktop customized settings.
+   
+   dconf load /org/mate/ < mate/desktop-backup/mate-backup 
+   
+   cp mate/marco-compton.conf ~/.config/ 
+   
+   cp -r mate/autostart/ ~/.config/ 
+   cp -r mate/panel2.d/ ~/.config/mate/ 
+
 Done, now you can even remove this directory.
 
 cd ../ && rm -rf dotfiles/ 
-

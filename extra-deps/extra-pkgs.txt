@@ -4,6 +4,7 @@ ranger
 python-ueberzug
 mate-tweak
 deadd-notification-center-bin
+deepinv20-dark-cursors-git
 ttf-comfortaa
 terminus-font
 ttf-fira-code
