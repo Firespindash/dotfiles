@@ -1,0 +1,18 @@
+.blurredBG, #main_window, .blurredBG.low, .blurredBG.normal { 
+	background: rgba(46, 52, 64, 0.6); 
+} 
+
+.blurredBG.notification { 
+	background: rgba(46, 52, 64, 0.6); 
+	border-radius: 5px; 
+} 
+
+#img_img { 
+	border-radius: 10px; 
+} 
+
+.deadd-noti-center { 
+	font-family: Comfortaa; 
+	font-size: 16px; 
+	background: rgba(46, 52, 64, 0.6); 
+} 

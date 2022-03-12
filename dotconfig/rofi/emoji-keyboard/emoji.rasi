@@ -1,0 +1,83 @@
+configuration {
+	font:					"Comfortaa 20";
+	show-icons:				true;
+	icon-theme:				"Tela-circle-black";
+	disable-history:		false;
+	sidebar-mode:			false;
+}
+
+* {
+	background:				#2e344099;
+	foreground:				#f2f2f2ff;
+	alternative:			#f2f2f215;
+}
+
+window {
+	transparency:			"real";
+	background-color:		@background;
+	text-color:				@foreground;
+	border:					0px;
+	border-radius:			0%;
+	width:					30%;
+	fullscreen:				false;
+}
+
+prompt {
+	enabled:				false;
+	padding:				0.30% 1% 0% -0.5%;
+	background-color:		transparent;
+	text-color:				@foreground;
+	font:					"Comfortaa 16";
+}
+
+listview {
+	background-color:		transparent;
+	columns:				4;
+	lines:					4;
+	spacing:				10px;
+	cycle:					true;
+	dynamic:				true;
+	layout:					vertical;
+	fixed-columns:			true;
+	fixed-lines:			true;
+}
+
+mainbox {
+	background-color:		transparent;
+	border:					0% 0% 0% 0%;
+	border-radius:			0%;
+	children:				[ listview ];
+	spacing:				0%;
+	padding:				10px;
+}
+
+element {
+	background-color:		transparent;
+	text-color:				@foreground;
+	orientation:			vertical;
+	border-radius:			0%;
+	padding:				40px;
+}
+
+element-icon {
+	background-color:		transparent;
+	size:					0px;
+	padding:				0%;
+	border:					0px;
+}
+
+element-text {
+	background-color:		transparent;
+	text-color:				@foreground;
+	expand:					false;
+	horizontal-align:		0.5;
+	vertical-align:			0;
+	margin:					0%;
+}
+
+element selected {
+	background-color:		@alternative;
+	text-color:				@foreground;
+	border:					0% 0% 0% 0%;
+	border-radius:			12px;
+}

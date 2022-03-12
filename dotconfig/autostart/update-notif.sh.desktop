@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=update-notif.sh
+Hidden=false
+Name[pt_BR]=Update checker
+Name=Update checker
+Comment[pt_BR]=Update notifier script.
+Comment=Update notifier script.
+X-MATE-Autostart-Delay=1

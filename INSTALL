@@ -62,6 +62,20 @@ River-theme:
    Cursor theme:
       I use Deepin Dark cursor theme, please look at the extra-deps/extra-pkgs.txt
 
+Configs:
+   Includes configurations about terminal, rofi, etc.
+
+   mv dotconfig/ ~/.config/ 
+
+   rm -rf ~/.config/rofi/emoji-keyboard/dev/ 
+   rm -rf ~/.config/mate/desktop-backup/ 
+
+   Home-specific dot configs.
+
+   mv dotbashrc ~/.bashrc 
+   mv dotprofile ~/.profile 
+   mv dotxprofile ~/.xprofile 
+
 Logout-screen:
    To install the logout widget.
    
@@ -73,11 +87,6 @@ Logout-screen:
    
    mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ 
    rm -rf ~/.local/share/logout-screen/dev/ 
-
-Rofi:
-   To install rofi app launcher.
-   
-   mv rofi/ ~/.config/rofi/ 
    
 Eww:
    To install dock bar of apps, eww widgets.
@@ -102,7 +111,7 @@ Eww:
    And test the bin to see if it's working.
    
    cd ~/dotfiles/ 
-   cp -r eww/ ~/.config/ 
+   cp -r dotconfig/eww/ ~/.config/ 
    mv ~/.config/eww/share/ ~/.local/share/eww/ 
 
 Wallpaper:
@@ -111,20 +120,10 @@ Wallpaper:
    
    mv wallpaper/leafs-improved.png ~/Images/wallpapers/ 
 
-Terminal:
-   To install Alacritty terminal theme.
-
-   mv alacritty/ ~/.config/ 
-
 Mate:
    To restore desktop customized settings.
    
-   dconf load /org/mate/ < mate/desktop-backup/mate-backup 
-   
-   cp mate/marco-compton.conf ~/.config/ 
-   
-   cp -r mate/autostart/ ~/.config/ 
-   cp -r mate/panel2.d/ ~/.config/mate/ 
+   dconf load /org/mate/ < dotconfig/mate/desktop-backup/mate-backup 
 
 Done, now you can even remove this directory.
 
