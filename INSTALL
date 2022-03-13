@@ -76,6 +76,11 @@ Configs:
    mv dotprofile ~/.profile 
    mv dotxprofile ~/.xprofile 
 
+Update Notification:
+   To install update notification script for the desktop.
+
+   sudo mv bin/update-notif.sh /usr/bin/ 
+
 Logout-screen:
    To install the logout widget.
    

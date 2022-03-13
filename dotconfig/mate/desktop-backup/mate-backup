@@ -1,17 +1,54 @@
+[application-configs/calculator]
+exec='mate-calc'
+
+[application-configs/terminal]
+exec='alacritty'
+
+[atril/default]
+window-ratio=(0.98039215686274506, 0.75757575757575757)
+
+[backgrounds]
+color-shading-type='solid'
+picture-filename='wallpaper/leafs-improved.png'
+picture-options='stretched'
+primary-color='rgb(255,255,255)'
+secondary-color='rgb(0,0,0)'
+show-desktop-icons=false
+
 [caja/desktop]
+computer-icon-visible=false
 font='Comfortaa 16'
+home-icon-visible=false
+network-icon-visible=false
+trash-icon-visible=false
+volumes-visible=false
 
 [caja/list-view]
-default-column-order=['name', 'size', 'type', 'date_modified', 'date_accessed', 'size_on_disk', 'extension', 'group', 'where', 'permissions', 'octal_permissions', 'owner', 'mime_type']
+default-column-order=['name', 'size', 'type', 'date_modified', 'date_accessed', 'size_on_disk', 'extension', 'group', 'where', 'permissions', 'octal_permissions', 'owner', 'mime_type', 'date_created']
 default-visible-columns=['name', 'size', 'type', 'date_modified']
 
+[caja/preferences]
+always-use-location-entry=true
+
 [caja/window-state]
-geometry='960x689+476+186'
+geometry='960x689+373+218'
 maximized=false
 sidebar-width=165
 start-with-sidebar=true
 start-with-status-bar=true
 start-with-toolbar=true
+
+[calc]
+accuracy=9
+angle-units='degrees'
+button-mode='basic'
+number-format='automatic'
+show-history=false
+show-thousands=false
+show-zeroes=false
+source-units='degree'
+target-units='radian'
+word-size=64
 
 [desktop/accessibility/keyboard]
 bouncekeys-beep-reject=true
@@ -44,7 +81,7 @@ exec='alacritty'
 
 [desktop/background]
 color-shading-type='solid'
-picture-filename='/home/lucas/wallpaper/leafs-improved.png'
+picture-filename='wallpaper/leafs-improved.png'
 picture-options='stretched'
 primary-color='rgb(255,255,255)'
 secondary-color='rgb(0,0,0)'
@@ -58,14 +95,14 @@ hinting='slight'
 [desktop/interface]
 document-font-name='Comfortaa 16'
 font-name='Comfortaa 16'
-gtk-decoration-layout=':minimize,maximize,close'
+gtk-decoration-layout='menu:minimize,maximize,close'
 gtk-theme='River'
 icon-theme='Tela-circle-black'
 monospace-font-name='Monospace 16'
 window-scaling-factor=0
 
 [desktop/keybindings/custom0]
-action='/home/lucas/.config/rofi/launcher/launcher.sh'
+action='.config/rofi/launcher/launcher.sh'
 binding='<Alt>F1'
 name='Launch customized application launcher'
 
@@ -74,6 +111,16 @@ action='spectacle'
 binding='Print'
 name='Custom screenshot taker'
 
+[desktop/keybindings/custom2]
+action='.config/rofi/emoji-keyboard/getemoji.sh'
+binding='<Primary>period'
+name='Launch emoji keyboard'
+
+[desktop/keybindings/custom3]
+action='jgmenu_run'
+binding='<Mod4>m'
+name='Activate right-click menu'
+
 [desktop/peripherals/keyboard]
 numlock-state='off'
 
@@ -81,18 +128,105 @@ numlock-state='off'
 duplicate-leds=false
 
 [desktop/peripherals/keyboard/kbd]
+layouts=['br']
 options=['terminate\tterminate:ctrl_alt_bksp']
+
+[desktop/peripherals/keyboard/preview]
+height=810
+width=1440
+x=240
+y=148
 
 [desktop/peripherals/mouse]
 accel-profile='default'
 cursor-theme='deepin'
 
 [desktop/session]
-session-start=1633275963
+session-start=1647108112
 show-hidden-apps=true
 
 [desktop/session/required-components]
 windowmanager='marco-compton'
+
+[desktop/sound]
+event-sounds=false
+theme-name='__no_sounds'
+
+[dictionary]
+database='!'
+source-name='Default'
+strategy='exact'
+
+[disk-usage-analyzer/ui]
+active-chart='rings'
+
+[engrampa/dialogs/extract]
+overwrite=true
+recreate-folders=true
+skip-newer=false
+
+[engrampa/general]
+unar-open-zip=false
+
+[engrampa/listing]
+list-mode='as-folder'
+name-column-width=250
+show-path=false
+sort-method='name'
+sort-type='ascending'
+
+[engrampa/ui]
+sidebar-width=200
+window-height=480
+window-width=600
+
+[eom/ui]
+image-collection=false
+
+[eom/view]
+background-color='rgb(0,0,0)'
+use-background-color=true
+
+[font-configuration]
+antialiasing='rgba'
+dpi=95.958041958041946
+hinting='slight'
+
+[general]
+action-double-click-titlebar='toggle_maximize'
+audible-bell=false
+auto-raise=true
+auto-raise-delay=400
+button-layout='menu:minimize,maximize,close'
+focus-mode='sloppy'
+mouse-button-modifier='<Super>'
+num-workspaces=4
+theme='River'
+titlebar-font='Comfortaa 16'
+
+[global-keybindings]
+panel-main-menu='<Mod4>m'
+run-command-screenshot='disabled'
+show-desktop='<Mod4>u'
+
+[interface]
+document-font-name='Comfortaa 16'
+font-name='Comfortaa 16'
+gtk-decoration-layout='menu:minimize,maximize,close'
+gtk-theme='River'
+icon-theme='Tela-circle-black'
+monospace-font-name='Monospace 16'
+window-scaling-factor=0
+
+[keybindings/custom0]
+action='.config/rofi/launcher/launcher.sh'
+binding='<Alt>F1'
+name='Launch customized application launcher'
+
+[keybindings/custom1]
+action='spectacle'
+binding='Print'
+name='Custom screenshot taker'
 
 [marco/general]
 action-double-click-titlebar='toggle_maximize'
@@ -107,16 +241,20 @@ theme='River'
 titlebar-font='Comfortaa 16'
 
 [marco/global-keybindings]
-panel-main-menu='<Mod4>m'
+panel-main-menu='<Primary><Shift>m'
 run-command-screenshot='disabled'
 show-desktop='<Mod4>u'
 
 [marco/window-keybindings]
 toggle-fullscreen='F11'
 
+[notification-daemon]
+popup-location='top_right'
+theme='coco'
+
 [panel/general]
 default-layout='default'
-history-mate-run=['dconf', 'falkon']
+history-mate-run=['alacritty', 'timeshift', 'mate-control-center', 'dconf', 'falkon']
 object-id-list=['notification-area', 'clock', 'object-1', 'object-3', 'object-2', 'object-5', 'object-0']
 toplevel-id-list=['top']
 
@@ -195,14 +333,74 @@ size=24
 color='rgba(255,255,255,0)'
 type='color'
 
+[peripherals/keyboard]
+numlock-state='off'
+
+[peripherals/keyboard/general]
+duplicate-leds=false
+
+[peripherals/keyboard/kbd]
+options=['terminate\tterminate:ctrl_alt_bksp']
+
+[peripherals/mouse]
+accel-profile='default'
+cursor-theme='deepin'
+
+[pluma]
+active-plugins=['time', 'filebrowser', 'docinfo', 'modelines', 'spell']
+background-pattern='none'
+bottom-panel-size=140
+side-panel-active-page=1541982214
+side-panel-size=200
+size=(904, 500)
+state=0
+statusbar-visible=true
+
 [power-manager]
 button-lid-ac='suspend'
 button-power='interactive'
 button-suspend='suspend'
+info-history-type='charge'
+info-stats-type='discharge-accuracy'
+
+[screensaver]
+idle-activation-enabled=false
+lock-enabled=false
+mode='blank-only'
+picture-filename='/usr/share/backgrounds/mate/desktop/Stripes.png'
+themes=@as []
+
+[search-tool]
+default-window-height=362
+default-window-maximized=false
+default-window-width=554
+
+[search-tool/select]
+contains-the-text=true
+
+[session]
+auto-save-session=false
+session-start=1634414234
+show-hidden-apps=true
+
+[session/required-components]
+windowmanager='marco-compton'
 
 [terminal/profiles/default]
-background-color='#FFFFFFFFDDDD'
+background-color='#2E2E34344040'
+background-darkness=0.57074910820451841
+background-type='transparent'
 bold-color='#000000000000'
+bold-color-same-as-fg=false
+cursor-blink-mode='on'
+cursor-shape='underline'
+default-size-columns=132
+default-size-rows=27
 foreground-color='#000000000000'
 palette='#2E2E34343636:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:#34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:#555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:#72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC'
+use-custom-default-size=true
+use-theme-colors=false
 visible-name='Padrão'
+
+[window-keybindings]
+toggle-fullscreen='F11'

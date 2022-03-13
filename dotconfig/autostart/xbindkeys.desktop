@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=xbindkeys
+Hidden=false
+Name[pt_BR]=Keybinder for the menu
+Name=Set keybinder for the menu
+Comment[pt_BR]=Activate keybinder for the desktop righ-click menu
+Comment=Activate keybinder for the desktop righ-click menu
+X-MATE-Autostart-Delay=0

@@ -4,12 +4,14 @@ ranger
 python-ueberzug
 mate-tweak
 deadd-notification-center-bin
+jgmenu
 deepinv20-dark-cursors-git
 ttf-comfortaa
 terminus-font
 ttf-fira-code
 bat
 ksuperkey
+xbindkeys
 ghostwriter
 zathura
 qBittorrent

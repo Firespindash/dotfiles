@@ -1,0 +1,4 @@
+Terminal,alacritty,utilities-terminal
+Browser,falkon,falkon
+File manager,thunar,system-file-manager
+^sep()
