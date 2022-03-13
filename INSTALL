@@ -75,6 +75,7 @@ Configs:
    mv dotbashrc ~/.bashrc 
    mv dotprofile ~/.profile 
    mv dotxprofile ~/.xprofile 
+   mv dotxbindkeysrc ~/.xbindkeysrc 
 
 Update Notification:
    To install update notification script for the desktop.
