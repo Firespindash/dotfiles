@@ -1,13 +1,13 @@
 font:
     size: 18
     normal:
-        family: FiraCode
+        family: mononoki Nerd Font
         style: Regular
     bold:
-        family: FiraCode
+        family: mononoki Nerd Font
         style: Bold
     italic:
-        family: FiraCode
+        family: mononoki Nerd Font
         style: Italic
 
 cursor:
@@ -15,12 +15,12 @@ cursor:
         shape: Underline
         blinking: Always
 
-background_opacity: 0.6
-
 window:
     dimensions:
         columns: 90
         lines: 17
+
+    opacity: 0.6
 
 # colors: old theme (Unknown)
     # primary:

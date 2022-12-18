@@ -19,12 +19,12 @@ def logout():
     debug(out)
 
 def reboot():
-    cmd = 'systemctl reboot'
+    cmd = 'systemctl reboot --no-wall'
     out = os.popen(cmd).read()
     debug(out)
 
 def shutdown():
-    cmd = 'systemctl poweroff'
+    cmd = 'systemctl poweroff --no-wall'
     out = os.popen(cmd).read()
     debug(out)
 

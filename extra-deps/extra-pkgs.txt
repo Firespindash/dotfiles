@@ -2,6 +2,7 @@
 
 ranger
 python-ueberzug
+picom-tryone-git
 mate-tweak
 deadd-notification-center-bin
 jgmenu
@@ -18,3 +19,5 @@ qBittorrent
 libreoffice
 inkscape
 colorpicker
+codium-transparent
+kronometer
