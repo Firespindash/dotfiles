@@ -28,14 +28,14 @@ Global Menu:
    cd ~/dotfiles/ 
 
 River-theme:
-   To install River theme.
+   To install River theme. Also install gtk3-classic package
+    for it to work properly.
    
-   Create if it doesn't exist.
-   
-   mkdir ~/.themes/ 
+   Create if it doesn't exist. (mkdir ~/.themes/)
    
    mv River-theme/ ~/.themes/River/ 
    mv ~/.themes/River/GTK/* ~/.themes/River/ 
+   mv ~/.themes/River/gtk-4.0/gtk.css ~/.config/gtk-4.0/ 
    rm -rf ~/.themes/River/GTK/ 
    rm -rf ~/.themes/River/dev/ 
    rm -rf ~/.themes/River/Kvantum/dev/ 
@@ -76,6 +76,11 @@ Configs:
    mv dotprofile ~/.profile 
    mv dotxprofile ~/.xprofile 
    mv dotxbindkeysrc ~/.xbindkeysrc 
+
+Thunar:
+   Now it has customized settings, to install them.
+
+   mv thumbnailers ~/.local/share/ 
 
 Update Notification:
    To install update notification script for the desktop.

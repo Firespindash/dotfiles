@@ -1,1 +1,3 @@
 export EDITOR=/usr/bin/micro
+export GTK_RELAX_RGBA=1
+export QT_QPA_PLATFORMTHEME=qt5ct

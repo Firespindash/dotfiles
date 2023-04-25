@@ -1,6 +1,7 @@
 # A list with other programs and things I use in my desktop
 
-ranger
+cfiles
+ffmpeg-audio-thumbnailer
 python-ueberzug
 picom-tryone-git
 mate-tweak

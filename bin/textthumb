@@ -1,0 +1,12 @@
+#!/bin/sh
+
+iFile=$(<"$2")
+tempFile=$(mktemp) && {
+	echo "${iFile:0:1600}" > "$tempFile"
+	# bat -pp --color=always "$tempFile" | textimg -o img.png -f /usr/share/fonts/TTF/FiraCode-Regular.ttf
+	convert -size 210x260 xc:none -draw "roundrectangle 0,0,210,260,24,24" mask.png
+	convert -size 210x260 -background "#f2f2f2" -pointsize 24 caption:@"$tempFile" txt.png
+	convert txt.png -matte mask.png \
+	  -compose DstIn -composite "$3"
+	rm mask.png txt.png "$tempFile"
+}

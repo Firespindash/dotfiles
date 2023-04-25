@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mimeList=$(ls /usr/share/mime/text | tr '\n' ';' | sed -e 's\.xml;\;text/\g')
+allMimes=$(echo "text/${mimeList%;*};")
+key=MimeType
+sed -i "/^$key/ { s/^#//; s%=.*%=$allMimes%; }" ~/.local/share/thumbnailers/text.thumbnailer
