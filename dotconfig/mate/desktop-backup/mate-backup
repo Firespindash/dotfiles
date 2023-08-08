@@ -9,7 +9,7 @@ window-ratio=(0.98039215686274506, 0.75757575757575757)
 
 [backgrounds]
 color-shading-type='solid'
-picture-filename='wallpaper/leafs-improved.png'
+picture-filename='~/wallpaper/leafs-improved.png'
 picture-options='stretched'
 primary-color='rgb(255,255,255)'
 secondary-color='rgb(0,0,0)'
@@ -31,7 +31,7 @@ default-visible-columns=['name', 'size', 'type', 'date_modified']
 always-use-location-entry=true
 
 [caja/window-state]
-geometry='960x689+373+218'
+geometry='960x689+476+186'
 maximized=false
 sidebar-width=165
 start-with-sidebar=true
@@ -81,16 +81,17 @@ exec='alacritty'
 
 [desktop/background]
 color-shading-type='solid'
-picture-filename='wallpaper/leafs-improved.png'
-picture-options='stretched'
+picture-filename='/home/lucas/wallpaper/starry_night-improved.png'
+picture-options='zoom'
 primary-color='rgb(255,255,255)'
 secondary-color='rgb(0,0,0)'
 show-desktop-icons=false
 
 [desktop/font-rendering]
 antialiasing='rgba'
-dpi=95.958041958041946
+dpi=96.0
 hinting='slight'
+rgba-order='rgb'
 
 [desktop/interface]
 document-font-name='Comfortaa 16'
@@ -98,7 +99,7 @@ font-name='Comfortaa 16'
 gtk-decoration-layout='menu:minimize,maximize,close'
 gtk-theme='River'
 icon-theme='Tela-circle-black'
-monospace-font-name='Monospace 16'
+monospace-font-name='Terminus 16'
 window-scaling-factor=0
 
 [desktop/keybindings/custom0]
@@ -107,19 +108,24 @@ binding='<Alt>F1'
 name='Launch customized application launcher'
 
 [desktop/keybindings/custom1]
-action='spectacle'
-binding='Print'
-name='Custom screenshot taker'
+action='xprop -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY 0xa8000000'
+binding='F12'
+name='Enable second-mode translucency picker.'
 
 [desktop/keybindings/custom2]
 action='.config/rofi/emoji-keyboard/getemoji.sh'
-binding='<Primary>period'
+binding='<Mod4>period'
 name='Launch emoji keyboard'
 
 [desktop/keybindings/custom3]
 action='jgmenu_run'
 binding='<Mod4>m'
 name='Activate right-click menu'
+
+[desktop/keybindings/custom4]
+action='xprop -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY 0xff000000'
+binding='<Shift>F12'
+name='Disable second-mode translucency.'
 
 [desktop/peripherals/keyboard]
 numlock-state='off'
@@ -142,14 +148,16 @@ accel-profile='default'
 cursor-theme='deepin'
 
 [desktop/session]
-session-start=1647108112
+idle-delay=120
+session-start=1691006971
 show-hidden-apps=true
 
 [desktop/session/required-components]
-windowmanager='marco-compton'
+windowmanager='marco-no-composite'
 
 [desktop/sound]
 event-sounds=false
+input-feedback-sounds=true
 theme-name='__no_sounds'
 
 [dictionary]
@@ -219,7 +227,7 @@ monospace-font-name='Monospace 16'
 window-scaling-factor=0
 
 [keybindings/custom0]
-action='.config/rofi/launcher/launcher.sh'
+action='/home/lucas/.config/rofi/launcher/launcher.sh'
 binding='<Alt>F1'
 name='Launch customized application launcher'
 
@@ -232,8 +240,9 @@ name='Custom screenshot taker'
 action-double-click-titlebar='toggle_maximize'
 audible-bell=false
 auto-raise=true
-auto-raise-delay=400
+auto-raise-delay=1000
 button-layout='menu:minimize,maximize,close'
+compositing-manager=false
 focus-mode='sloppy'
 mouse-button-modifier='<Super>'
 num-workspaces=4
@@ -243,9 +252,15 @@ titlebar-font='Comfortaa 16'
 [marco/global-keybindings]
 panel-main-menu='<Primary><Shift>m'
 run-command-screenshot='disabled'
+run-command-window-screenshot='Print'
 show-desktop='<Mod4>u'
+switch-to-workspace-1='<Mod4>1'
+switch-to-workspace-2='<Mod4>2'
+switch-to-workspace-3='<Mod4>3'
+switch-to-workspace-4='<Mod4>4'
 
 [marco/window-keybindings]
+begin-resize='<Mod4>F8'
 toggle-fullscreen='F11'
 
 [notification-daemon]
@@ -254,8 +269,9 @@ theme='coco'
 
 [panel/general]
 default-layout='default'
-history-mate-run=['alacritty', 'timeshift', 'mate-control-center', 'dconf', 'falkon']
-object-id-list=['notification-area', 'clock', 'object-1', 'object-3', 'object-2', 'object-5', 'object-0']
+history-mate-run=['alacritty', 'falkon', 'thunar', 'mate-calc', 'io.github.jliljebl.Flowblade', 'steam', 'mate-tweak', 'leafpad', 'simplescreenrecorder', 'minecraft-launcher']
+object-id-list=['notification-area', 'clock', 'object-1', 'object-0', 'object-7', 'object-2', 'object-4']
+show-program-list=false
 toplevel-id-list=['top']
 
 [panel/menubar]
@@ -271,6 +287,7 @@ position=192
 toplevel-id='top'
 
 [panel/objects/clock/prefs]
+cities=@as []
 custom-format=''
 expand-locations=false
 format='24-hour'
@@ -280,7 +297,7 @@ applet-iid='NotificationAreaAppletFactory::NotificationArea'
 locked=false
 object-type='applet'
 panel-right-stick=false
-position=1670
+position=1660
 toplevel-id='top'
 
 [panel/objects/object-0]
@@ -301,10 +318,10 @@ position=29
 toplevel-id='top'
 
 [panel/objects/object-2]
-launcher-location='source.desktop'
+launcher-location='launcher.sh.desktop'
 object-type='launcher'
 panel-right-stick=false
-position=3
+position=12
 toplevel-id='top'
 
 [panel/objects/object-3]
@@ -314,11 +331,11 @@ panel-right-stick=false
 position=1471
 toplevel-id='top'
 
-[panel/objects/object-5]
-launcher-location='oblogout.sh-1.desktop'
+[panel/objects/object-4]
+launcher-location='oblogout.sh.desktop'
 object-type='launcher'
-panel-right-stick=true
-position=24
+panel-right-stick=false
+position=1919
 toplevel-id='top'
 
 [panel/toplevels/top]
@@ -330,7 +347,7 @@ screen=0
 size=24
 
 [panel/toplevels/top/background]
-color='rgba(255,255,255,0)'
+color='rgba(46,52,64,0)'
 type='color'
 
 [peripherals/keyboard]

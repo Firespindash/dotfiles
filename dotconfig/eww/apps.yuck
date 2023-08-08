@@ -9,9 +9,9 @@
 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
 	 		 :onclick "./exec alacritty"
 	 		 :onrightclick "./exec appbar")
-	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/mpv.svg'); background-repeat: no-repeat;
+	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/video-player.svg'); background-repeat: no-repeat;
 	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"
-	 		 :onclick "./exec mpv"
+	 		 :onclick "./exec celluloid"
 	 		 :onrightclick "./exec appbar")
 	 (button :style "background-image: url('/usr/share/icons/Tela-circle-black/scalable/apps/org.gnome.gedit.svg'); background-repeat: no-repeat;
  	 				 min-width: 80px; min-height: 80px; background-size: 80px; border: none; margin: 10px;"

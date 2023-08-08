@@ -1,6 +1,6 @@
 These are instructions on how to install this customization
 It's also recommended that you have installed the apps that are expected to be there in the configs. Mainly compton-tryone and the ones from eww:
-thunar, alacritty-ligatures, mpv, gedit, falkon, timeshift and qview.
+thunar, alacritty-ligatures, celluloid, gedit, falkon, timeshift and qview.
  
 Global Menu:
    To install topmenu on panel.

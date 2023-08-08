@@ -3,7 +3,7 @@
 case $1 in
 alacritty) alacritty --working-directory ~ ;;
 atril) atril ;;
-mpv) mpv ;;
+celluloid) celluloid ;;
 gedit) gedit ;;
 falkon) falkon ;;
 thunar) thunar ~ ;;
