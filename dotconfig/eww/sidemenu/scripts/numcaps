@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Other states could be added also, like Scroll Lock, but I already have this feature
+# on my keyboard for now
+echo "$(xset q | sed 's/   / /g' | grep -E -o "Caps Lock.{0,5}" | sed 's/[ ]$//' | sed 's/\ o/ O/')
+$(xset q | sed 's/    / /g' | grep -E -o "Num Lock.{0,5}"| sed 's/[ ]$//' | sed 's/\ o/ O/')"

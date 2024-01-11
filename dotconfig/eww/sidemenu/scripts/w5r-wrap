@@ -1,0 +1,61 @@
+#!/bin/sh
+
+checks() {
+	input_to_check="$1"
+
+	[ -z "$input_to_check" ] && { showWarningMessage "Please input a location.";
+	 getInput; }
+	
+	LC_CTYPE=C
+	case "$input_to_check" in
+		*[![:ascii:]]*)
+			showWarningMessage "Please do not use non-english characters."
+			getInput
+		;;
+		*[0-9]*)
+			showWarningMessage "Please input a valid location."
+			getInput
+		;;
+	esac
+}
+
+getInput() {
+	if location_input=$(zenity --entry --title "Select a location (in English)" --text "" \
+	 --entry-text "Sao Paulo" --width 540 \
+	 --icon="/usr/share/icons/Tela-circle-black/scalable/apps/terminal.svg")
+	then
+		checks "$location_input"
+	else
+		exit
+	fi
+}
+
+showWarningMessage() {
+	message_to_show="$1"
+	zenity --info --icon-name="error" --text "$message_to_show"
+}
+
+installHook() {
+	location="$1"
+
+	api_location=$(echo "$location" | sed 's/_/+/')
+	search_url="https://geocoding-api.open-meteo.com/v1/search?name=${api_location}\
+&count=1&language=en&format=json"
+	coordinates=$(curl -s "$search_url" | cut -d ',' -f 3-4)
+	latitude=$(echo "$coordinates" | cut -d ':' -f 2 | cut -d ',' -f 1 |
+	 LC_ALL=C xargs printf "%.4f\n")
+	longitude=$(echo "$coordinates" | cut -d ':' -f 3 | LC_ALL=C xargs printf "%.4f\n")
+	
+	mv -v weather weather.bak
+	sed "s/Sao_Paulo/$location/" weather.bak > weather && chmod +x weather
+	echo "${api_location},${latitude},$longitude" > ../aqi-data
+}
+
+# For first install...
+[ "$1" = '-f' ] && {
+ location=$(ls -l /etc/localtime | cut -d '>' -f 2 | xargs -I % basename '%'); } || {
+ getInput;
+
+ location=$(echo "$location_input" | sed 's/ /_/'); }
+
+installHook "$location"

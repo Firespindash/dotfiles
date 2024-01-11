@@ -1,0 +1,4 @@
+#!/bin/sh
+
+top -b -n 1 | head -n 7 | sed 's/  / /g'
+top -b -n 1 | tail -n 12 | sed 's/   / /g' | tac

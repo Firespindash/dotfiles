@@ -1,0 +1,4 @@
+#!/bin/sh
+
+. ~/bin/time_usage.sh -t 0 -g -k
+echo "last.png"

@@ -1,4 +1,6 @@
 {
     "colorscheme": "simple",
-    "mkparents": true
+    "mkparents": true,
+    "ruler": false,
+    "statusline": false
 }

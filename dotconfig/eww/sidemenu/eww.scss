@@ -1,0 +1,122 @@
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  margin: 0;
+  padding: 0;
+}
+
+//Global Styles
+window {
+  background-color: rgba(242, 242, 242, 0.6);
+  color: #22222c;
+  //Blur bleeding formula
+  /* border-radius: 0 64px 0 0; */
+  font-family: Comfortaa;
+}
+
+// Styles on classes (see eww.yuck for more information)
+button { 
+  outline: none;
+  background-color: rgba(242, 242, 242, 0.6); 
+  border-radius: 10px;
+} 
+
+button:hover {
+  border: 1px solid rgba(33, 33, 34, 0.6);
+}
+
+.bigDisplayButton {
+  min-width: 267px; 
+  border-radius: 10px; 
+  background-color: rgba(242, 242, 242, 0.6);
+  margin: 10px;
+}
+
+.layer1 {
+  /* background-color: gray; */
+  margin-top: 9px; 
+  padding-top: 1px; 
+  margin-left: 2px; 
+}
+
+.layer1 button {
+  margin-top: 0;
+}
+
+.layer2 {
+  /* background-color: brown; */
+  margin-left: 2px; 
+}
+
+.layer3 {
+  /* background-color: cyan; */
+  margin-left: 2px; 
+}
+
+.layer4 {
+  /* background-color: yellow; */
+  margin-left: 2px; 
+}
+
+.smallContainer {
+  /* background-color: blue; */
+  min-width: 267px;
+  min-height: 197px;
+  margin: 10px;
+  margin-top: 0;
+}
+
+.commandDisplay {
+  background-color: rgba(242, 242, 242, 0.6);
+  min-width: 267px;
+  min-height: 197px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.airQuality {
+  padding-top: 56px;
+}
+
+.labelDisplay {
+  background-color: rgba(242, 242, 242, 0.6);
+  border-radius: 10px;
+}
+
+.monospaced-fn {
+  font-family: FiraCode;
+  font-size: 19px;
+}
+
+/* The "one class one change"-like css,
+ not everything can work in this way */
+.extra-margin {
+  margin: 10px;
+}
+
+.max-fn {
+  font-size: 72px;
+}
+
+.icon {
+  font-size: 25px;
+}
+
+.label-fn {
+  font-size: 22px;
+}
+
+.fn-plus-1 {
+  font-size: 17px;
+}
+
+.fn {
+  font-size: 16px;
+}
+
+.fn-min {
+  font-size: 8px;
+}
+
+.fn-extra-mini {
+  font-size: 6px;
+}

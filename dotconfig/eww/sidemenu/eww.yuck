@@ -1,0 +1,215 @@
+;; weather info
+(defpoll weather :interval "1s" :initial "No loc"
+            "~/.config/eww/sidemenu/scripts/weather")
+
+;; caps/num detector
+(defpoll capsNum :interval "100ms" :initial "Caps Lock: Off
+Num Lock: Off"
+            "~/.config/eww/sidemenu/scripts/numcaps")
+
+;; open connections
+(defpoll netConnections :interval "1s" :initial "ss -t"
+            "ss -t")
+
+;; open processes
+(defpoll openProcesses :interval "1s" :initial "top"
+            "~/.config/eww/sidemenu/scripts/top-wrap")
+
+;; calendar
+(defpoll monthCalendar :interval "1s" :initial "cal"
+            "cal | sed '/^ *$/d'")
+
+;; air quality
+(defpoll airQuality :interval "10m" :initial "0.0"
+            "~/.config/eww/sidemenu/scripts/air-q5y | cut -d ',' -f 1")
+
+;; air quality scale color
+(defpoll airQualityColor :interval "10m" :initial "rgba(242, 242, 242, 0.6)"
+            "~/.config/eww/sidemenu/scripts/air-q5y | cut -d ',' -f 2")
+
+;; USB detector
+(defpoll usbConnections :interval "1s" :initial "lsusb"
+            "lsusb")
+
+;; System time usage metrics
+(defpoll timeUsage :interval "1m" :initial "scripts/last.png"
+            "~/.config/eww/sidemenu/scripts/last-wrap")
+
+;; 4-block Display Structure
+(defwidget smallVLayer1 []
+  (box :width "90"
+       :height "130"
+       :orientation "v"
+       :space-evenly false
+       :spacing "10"
+    (button :class "icon"
+            :onclick "./scripts/c9r-wrap"
+            :width "90"
+            :height "60"
+          (box :width 60
+               :height 57
+               :space-evenly false
+               :style "background-image: url('./images/colorpicker.svg');
+                       background-repeat: no-repeat; background-size: 57px;
+                       margin-top: 2px; margin-left: 17px;"))
+    (button :class "icon"
+            :onrightclick "./scripts/w5r-wrap"
+            :width "90"
+            :height "60"
+          "${weather}")))
+(defwidget mediumLayer1 []
+  (box :width "267"
+       :height "130"
+       :space-evenly false
+       :spacing "10"
+    (smallVLayer1)
+    (label :text "↑ ${EWW_NET["wlp6s0"].NET_UP / 1000} Kb/s
+↓ ${EWW_NET["wlp6s0"].NET_DOWN / 1000} Kb/s"
+           :width 167
+           :height 130
+           :class "labelDisplay fn")))
+
+(defwidget mediumContainer1 []
+  (box :class "smallContainer"
+       :width "267"
+       :height "197"
+       :orientation "v"
+       :space-evenly false
+       :spacing "10"
+    (mediumLayer1)
+    (button :class "fn"
+            :onclick "notify-send 'Hi!' 'I have not seem an utility for this, so it is
+not coded, if you need this functionality and can code it, you are welcome.'"
+            :width "267"
+            :height "57"
+          "Switch Keyboard")))
+
+;; 3-block Display Structure
+(defwidget smallLayer1 []
+  (box :width "267"
+       :height "60"
+       :space-evenly false
+       :spacing "10"
+    (button :onclick "mate-volume-control"
+            :width "128"
+            :height "57"
+          (box :width 60
+               :height 57
+               :space-evenly false
+               :style "background-image: url('./images/sound.svg');
+                       background-repeat: no-repeat; background-size: 60px;
+                       margin-left: 36px;"))
+    (button :class "icon"
+            :onclick ". ~/.config/rofi/emoji-keyboard/getemoji.sh"
+            :width "128"
+            :height "57"
+          "😀")))
+(defwidget smallContainer1 []
+  (box :class "smallContainer"
+       :width "267"
+       :height "197"
+       :orientation "v"
+       :space-evenly false
+       :spacing "10"
+    (smallLayer1)
+    (label :text "${capsNum}"
+           :width 267
+           :height 127
+           :class "labelDisplay label-fn")))
+
+;; 2-block Display Structure
+;;(defwidget smallLayer1 []
+;;  (box :width "267"
+;;       :height "217"
+;;       :orientation v
+;;       :space-evenly true
+;;       :spacing "10"
+;;    (button :onclick "mate-volume-control"
+;;          "S")
+;;    (button :onclick ". ~/.config/rofi/emoji-keyboard/getemoji.sh"
+;;          "E")))
+
+(defwidget layer1 []
+  (box :halign "end"
+       :class "layer1"
+       :width "576"
+       :height "217"
+       :space-evenly false
+    (mediumContainer1)
+    (smallContainer1)))
+
+(defwidget layer2 []
+  (box :halign "end"
+       :class "layer2"
+       :width "576"
+       :height "217"
+       :space-evenly true
+      (label :text "${netConnections}"
+             :width 267
+             :height 197
+             :limit-width 1250
+             :wrap true
+             :class "commandDisplay fn-min")
+      (label :text "${openProcesses}"
+             :width "267"
+             :class "commandDisplay fn-extra-mini")))
+
+(defwidget layer3 []
+  (box :halign "end"
+       :class "layer3"
+       :width "576"
+       :height "217"
+       :space-evenly true
+      (button :onclick "flatpak run codes.loers.Karlender"
+              :width 267
+              :height 197
+              :class "extra-margin monospaced-fn" 
+          "${monthCalendar}")
+      (box :class "bigDisplayButton airQuality max-fn"
+           :width 267
+           :height 197
+           :orientation "v"
+           :space-evenly false
+           :spacing "50"
+      	   :style "background-color: ${airQualityColor};"
+      	 "${airQuality}"
+      	 (label :text "Source: CAMS ENSEMBLE & Open Meteo"
+      	        :width 267
+      	        :class "fn-min"))))
+
+(defwidget layer4 []
+  (box :halign "end"
+       :class "layer4"
+       :width "540"
+       :height "217"
+       :space-evenly false
+      (label :text "${usbConnections}"
+             :wrap true
+             :width "267"
+             :class "commandDisplay fn-min")
+      (image :path "${timeUsage}"
+             :image-width 267
+             :image-height 200
+             :class "bigDisplayButton")))
+
+(defwidget skel []
+  (box :orientation "v"
+       :space-evenly false
+       :valign "end"
+    (layer1)
+    (layer2)
+    (layer3)
+    (layer4)))
+
+(defwindow sidemenu
+           :monitor 0
+           :geometry (geometry :x "0"
+                               :y "0"
+                               :width "35%"
+                               :height "876"
+                               :vexpand false
+                               :anchor "bottom left")
+           :stacking "fg"
+           :windowtype "dialog"
+           :wm-ignore true
+	(skel))

@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# It is not really precise because of the requirement for geolocation naturally
+# It may bug in some case, one easy way to solve it all is by fixing more specific
+# location data by yourself
+
+today=$(date -I)
+hour=$(date "+%H")
+data_index=$(expr $hour + 1)
+latitude=$(cut -d ',' -f 2 aqi-data)
+longitude=$(cut -d ',' -f 3 aqi-data)
+url="https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${latitude}\
+&longitude=${longitude}&hourly=pm2_5&hourly&start_date=${today}\
+&end_date=${today}"
+
+air_quality=$(curl -s "$url" | cut -d '[' -f 3 | cut -d ',' -f $data_index |
+ cut -d ']' -f 1)
+# For extra precision (at least a bit of it)
+rounded_air_quality_value=$(echo "${air_quality}*10" | bc | xargs printf "%.0f");
+
+printf "%s" "${air_quality},"
+
+if [ $rounded_air_quality_value -ge 2505 ]
+then
+	printf "%s" '#7d2181'     # purple (250.5-500.5)
+else
+	if [ $rounded_air_quality_value -ge 1505 ]
+	then
+		printf "%s" '#960032' # red    (150.5-250.5)
+	elif [ $rounded_air_quality_value -ge 555 ]
+	then
+		printf "%s" '#ff5050' # pink   (55.5-150.5)
+	elif [ $rounded_air_quality_value -ge 355 ]
+	then
+		printf "%s" '#f0a741' # orange (35.5-55.5)
+	elif [ $rounded_air_quality_value -ge 130 ]
+	then
+		printf "%s" '#f0e641' # yellow (12-35.5)
+	elif [ $rounded_air_quality_value -ge 0 ]
+	then
+		printf "%s" '#50ccaa' # green  (0-12)
+  	else 
+		echo "Something unexpected happened."
+		exit
+	fi
+fi

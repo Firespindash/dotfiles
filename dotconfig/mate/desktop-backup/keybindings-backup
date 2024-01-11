@@ -1,9 +1,0 @@
-[custom0]
-action='/home/lucas/.config/rofi/launcher/launcher.sh'
-binding='<Alt>F1'
-name='Launch customized application launcher'
-
-[custom1]
-action='spectacle'
-binding='Print'
-name='Custom screenshot taker'

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Colorpicker wrapper script
+
+mate-color-select

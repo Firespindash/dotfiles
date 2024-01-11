@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "$(curl wttr.in/Sao_Paulo?format=p1 2>/dev/null |
+ grep 'temperature_celsius{forecast="current"}' | cut -d ' ' -f 2)°"

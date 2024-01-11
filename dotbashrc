@@ -32,22 +32,18 @@ colors() {
 }
 
 # Change the window title of X terminals
-case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
-esac
+# case ${TERM} in
+# 	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
+# 		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
+# 		;;
+# 	screen*)
+# 		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
+# 		;;
+# esac
 
 use_color=true
  
 # Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
 safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
 match_lhs=""
 [[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
@@ -72,7 +68,78 @@ if ${use_color} ; then
 		PS1='> '
 	else
 		# PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-		PS1='> '
+		# function timer_now {
+		    # date +%s%N
+		# }
+		# 
+		# function timer_start {
+		    # timer_start=${timer_start:-$(timer_now)}
+		# }
+		# 
+		# function timer_stop {
+		    # local delta_us=$((($(timer_now) - $timer_start) / 1000))
+		    # local us=$((delta_us % 1000))
+		    # local ms=$(((delta_us / 1000) % 1000))
+		    # local s=$(((delta_us / 1000000) % 60))
+		    # local m=$(((delta_us / 60000000) % 60))
+		    # local h=$((delta_us / 3600000000))
+		    # if ((h > 0)); then timer_show="${h}h ${m}m"
+		    # elif ((m > 0)); then timer_show="${m}m ${s}s"
+		    # elif ((s >= 10)); then timer_show=${s}.$((ms / 100))s
+		    # elif ((s > 0)); then timer_show=${s}.$(printf %03d $ms)s
+		    # elif ((ms >= 100)); then timer_show=${ms}ms
+		    # elif ((ms > 0)); then timer_show=${ms}.$((us / 100))ms
+		    # else timer_show=${us}us
+		    # fi
+		    # unset timer_start
+		# }
+		# trap 'timer_start' DEBUG
+		# PROMPT_COMMAND=timer_stop
+		# PS1='$timer_show > '
+		function git_prompt {
+			$(git rev-parse --is-inside-work-tree &>/dev/null) && {
+			 branch=$(git describe --contains --all);
+			 if [ $(git stash list --no-decorate | wc -l) -gt 0 ]
+			 then
+				status="(stashed)"
+			 elif [ $(git status --branch --porcelain | wc -l) -gt 1 ]
+			 then
+				status_cmd=$(git status --branch --porcelain)
+				if [ $(echo "$status_cmd" | grep "ahead") ]
+				then
+					status="(staged)"
+				elif [ $(echo "$status_cmd" | grep "behind") ]
+				then
+					status="(behind)"
+				else
+					status=$(echo "$status_cmd" | awk 'NR==2{print $1}')
+					if [ $(echo "$status") == "??" ]
+					then
+						status="(untracked)"
+					elif [ $(echo "$status") == 'U' ]
+					then
+						status="(unmerged)"
+					elif [ $(echo "$status") == 'M' ] || [ $(echo "$status") == 'A' ] || [ $(echo "$status") == 'D' ]
+					then
+						status="(changed)"
+					else
+						status=""
+					fi
+				fi
+			 fi;
+			 PS1="[${branch}]${status}> ";
+			} || PS1='> ' # PS1='$timer_show > '
+		}
+
+		# function adv_prompt {
+			# time_start
+			# git_prompt
+		# }
+
+		# trap adv_prompt DEBUG
+
+		PROMPT_COMMAND=git_prompt
+
 	fi
 
 	alias ls='ls --color=auto'
@@ -99,13 +166,20 @@ alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 alias colorpanes='source ~/bin/colorpanes.sh'
-alias firefox-theme-switcher='source ~/.mozilla/firefox-theme-switcher.sh'
-alias tester='source ~/bin/tester.sh'
-alias halt='shutdown now'
-alias pkg-count='pacman -Q | wc -l'
-alias update='update.sh'
+alias halt='shutdown now --no-wall'
+alias pkgcount='pacman -Q | wc -l'
+alias update='sudo update'
 alias lsall='ls -alth'
 alias pacman='sudo pacman'
+alias checkup='checkupdates'
+alias yadd='yay -S'
+alias ydel='yay -Rcns'
+alias ysearch='yay -Ss'
+alias yup='yay -Sua'
+alias flatupdate='flatpak update -y'
+alias ed='$EDITOR'
+alias open='xdg-open 2>/dev/null'
+alias sl='echo "Calm down." && ls'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -117,8 +191,8 @@ shopt -s expand_aliases
 
 # export QT_SELECT=4
 
-export HISTSIZE=1000
-export HISTFILESIZE=2000
+export HISTSIZE=10000
+export HISTFILESIZE=20000
 
 # Remove duplicated lines.
 export HISTCONTROL=ignoreboth:erasedups
@@ -175,3 +249,13 @@ export MICRO_TRUECOLOR=1
 # execute pywal if it is in spectrwm
 PID=$(pgrep -U 1000 "^spectrwm")
 [ "$PID" ] && wal -Rnq
+
+# setup a title
+title() {
+  cmd="$1"
+  echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~} ($(echo $cmd | cut -d ' ' -f 1,2))\007"
+}
+
+trap 'title "$BASH_COMMAND"' DEBUG
+
+source ~/.local/share/doc/command-not-found.bash

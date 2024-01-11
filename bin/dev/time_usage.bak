@@ -1,0 +1,286 @@
+#!/bin/bash
+
+since=8
+to=1
+all_enable=0
+size="800,600"
+filename="-"
+
+# options that would be nice to implement -s, for size, -fn for font, -ft for format
+
+while getopts :f:t:ac:h opt
+do
+	case $opt in
+		f)
+			since=$(echo "$OPTARG" | tr -dc '0-9')
+			[ -z $since ] && since=8 || since=$(($since + 1))
+			[ $since -eq 0 ] && { echo "Error: Invalid number."; exit 1; }
+			;;
+		t)
+			to=$(echo "$OPTARG" | tr -dc '0-9')
+			# [ -z $to ] && to=1
+			# [ $to -eq 0 ] && { echo "Error: $(basename $0) can't get data about today."; exit 1; }
+			;;
+		a)
+			all_enable=1
+			;;
+		c)
+			file="$OPTARG"
+			[ -z $file ] && { echo "Error: Please give a file."; exit 1; }
+			[ -f $file ] && filename=$file || { \
+				echo "Error: $file file couldn't be found."; exit 1; }
+			;;
+		h)
+			echo "$(basename $0) is a script to create one chart with the last command log.
+
+  Options:
+    -f '-Ndays', 'N'    Set FROM how many days you want to go back and display.
+    -t '-Ndays', 'N'    Set TO how many days you want it to go and display.
+    -a                  Display FROM ALL the log, if you want to see other
+                         log file, append '-f FILE' to the last command
+                         in the lines 77, 78, 80 and 81.
+    -c 'FILE'           Use a different config file for gnuplot,
+                         default filename to be plot is 'last.log'.
+    -h                  Show help and exit.
+
+All options are optional and the single quote (') isn't needed.
+The defaults are 7 days from yesterday,'-f -7days -t -1day'.
+The maximum recommended is 30 days back, '-f -30days'.
+And it can only start from yesterday, it can't get data from today."
+			exit
+			;;
+		\?)
+			echo "Error: Invalid flag, please use one of the flags -f,-t,-a,-c or -h for help."
+			exit 1
+			;;
+	esac
+done
+
+count=$(expr $since - $to)
+size="800,600"
+
+[ $count -gt 7 ] && size="1920,1080"
+[ $count -gt 29 ] || [ $all_enable -eq 1 ] && size="2560,1440"
+[ $count -le 1 ] && { echo "To is older than From."; exit 1; }
+
+# Data collection
+last reboot | cut -c 44-49 | awk NF > days.log
+last reboot | cut -c 67-71 | awk NF > hours.log
+
+start_year=$(last reboot | awk NF | tail -n 1 | cut -d ' ' -f 7)
+start_date=$(tail -n 1 days.log)
+
+# Test if there is not enough data for the request
+logtime=$((($(date +%s) - $(date +%s -ud "${start_date} ${start_year}")) / 3600 / 24 ))
+
+[ $logtime -lt $since ] && 
+	{ echo "From is older than last's log."; exit 1; }
+
+function timenow() {
+	[ -n "$(uptime | grep min | wc -l)" ] && { hour=0; \
+	 minute=$(uptime | cut -d 'm' -f 1 | cut -d ' ' -f 4); } || \
+	 { hour=$(uptime | cut -d ':' -f 3-4 | cut -d ' ' -f 4 | sed 's/,$//' | cut -d ':' -f 1);
+	 minute=$(uptime | cut -d ':' -f 3-4 | cut -d ' ' -f 4 | sed 's/,$//' | cut -d ':' -f 2); }
+	hourNow=$(printf '%02d:%02d' "$hour" "$minute")
+	sed -i "s/nning/$hourNow/" hours.log
+}
+# Revert list/solves some inconsistences
+[ $to -eq 0 ] && timenow
+tac days.log > days_sorted.log
+sed -i 's/^+.*$/00:00/' hours.log
+
+# Format dates
+while read line
+do
+	dates+=($(date -d "$line" +%d/%m))
+done < days_sorted.log
+
+# Generate a new file to work with
+for i in "${dates[@]}"
+do
+	printf "$i\n" >> dates.log
+done
+
+[ $to -gt 1 ] && to=$(expr $to + 1)
+
+day=$(date -d "-${to}days" +%d/%m)
+dat=$(grep "$day" dates.log | wc -l)
+
+start_alternative=$(LC_TIME=en_US date -d "-${since}days" +"%b %d")
+
+# Check for starting date inconsistencies
+if [ $dat -eq 0 ]
+then
+	add_d=1
+	while [ $dat -eq 0 ]
+	do
+		start_d=$(date -d "$start_alternative + $add_d days" +"%d/%m")
+		dat=$(grep -n "$start_d" dates.log | cut -d ':' -f 1 | awk '{print; exit;}')
+		add_d=$(expr $add_d + 1)
+	done
+fi
+
+# Organize lists
+[ $all_enable -eq 0 ] && { tail -n "+${dat}" dates.log > days_corrected.log; \
+	tac hours.log | tail -n "+${dat}" > hours_sorted.log; } || { \
+	cat dates.log > days_corrected.log; tac hours.log > hours_sorted.log; }
+
+# Loop through files to find duplicates dates
+start=$(date -d "-${since}days" +"%d/%m")
+if [ $all_enable -eq 0 ]
+then
+	dat_occurencies=$(grep -n "$start" days_corrected.log | cut -d ':' -f 1 | awk '{print; exit;}')
+
+	if [ -z $dat_occurencies ]
+	then
+		add_d=1
+		while [ -z $dat_occurencies ]
+		do
+			start_d=$(date -d "$start_alternative + $add_d days" +"%d/%m")
+			dat_occurencies=$(grep -n "$start_d" days_corrected.log | cut -d ':' -f 1 | awk '{print; exit;}')
+			add_d=$(expr $add_d + 1)
+		done
+	fi
+	dat_occurencies=$(($dat_occurencies + 1))
+	cat days_corrected.log | tail -n "+${dat_occurencies}" > dates_corrected.log
+	cat hours_sorted.log | tail -n "+${dat_occurencies}" > hours_corrected.log
+else
+	tac days_corrected.log > dates_corrected.log
+fi
+
+rm days.log
+
+last_day=$(date -d "-${to}days" +%d/%m)
+# Check if the all option is enable which one is the starting date
+[ $all_enable -eq 1 ] && first_day=$logtime || first_day=$(($since - 1))
+
+dates_list=($(for i in $(seq $first_day -1 $to); do date --date="$i days ago" +%d/%m; done))
+# Generate a file with a date list
+for i in "${dates_list[@]}"
+do
+	printf "$i\n" >> tmp.log
+done
+
+# Add duplicated date lines
+while read line
+do
+	dates_line=$(grep "$line" dates_corrected.log | wc -l)
+	[ $dates_line -gt 1 ] &&
+		grep "$line" dates_corrected.log >> complete.log ||
+		printf "$line\n" >> complete.log
+done < tmp.log
+
+line_num=1
+# Compile the file with date and time info
+while read line
+do
+	key=0
+	for j in "${dates[@]}"
+	do
+		if [ "$line" == "$j" ]
+		then
+			hour=$(awk -v line_n=$line_num 'FNR == line_n {print; exit;}' hours_sorted.log)
+			printf "$line\t$hour\n" >> usage.log
+			line_num=$(expr $line_num + 1)
+			key=1
+			break
+		fi
+	done
+	[ ! $key -eq 1 ] && printf "$line\t00:00\n" >> usage.log
+done < complete.log
+
+rm tmp.log
+
+avoid=0
+extra=0
+# Loop through usage.log for formatting and small fixes
+while read line
+do
+	d=$(echo "$line" | cut -f 1)
+	sum=$(grep "$d" usage.log | wc -l)
+	if [ $sum -gt 1 ] && [ ! "$avoid" == "$d" ]
+	then
+		grep "$d" usage.log | cut -f 2 > sum.log
+		new_time=$(awk -F: '
+	    { n=0; for(i=NF; i>=1; --i) secs += $i * 60 ^ n++ }
+	    END {
+	      days    = int(secs / 3600)
+	      hours   = int((secs - days * 3600) / 60)
+	      minutes = secs % 60
+	      printf "%02d:%02d\n", hours, minutes }
+	    ' sum.log)
+		# this piece of code above has to be changed, my disappointment to it is immense, but I have to use it now
+		avoid=$d
+		check_time=$(echo $new_time | cut -d ':' -f 1)
+		mins=$(echo $new_time | cut -d ':' -f 2)
+		other_time=$(expr $check_time \* 60 + $mins )
+		if [ $other_time -gt 1440 ]
+		then
+			extra_time=$(expr $check_time - 24)
+			extra_time=$(printf "%02d" $extra_time)
+			extra_time=$(echo "$extra_time:$mins")
+			printf "$d\t24:00\n" >> last.log
+			extra=1
+		else
+			printf "$d\t$new_time\n" >> last.log
+		fi
+	elif [ ! "$avoid" == "$d" ]
+	then
+		same_time=$(grep "$line" usage.log | cut -f 2)
+		if [ $extra -eq 1 ]
+		then
+			echo "$extra_time" > sum.log
+			echo "$same_time" >> sum.log
+			new_t=$(awk -F: '
+			{ n=0; for(i=NF; i>=1; --i) secs += $i * 60 ^ n++ }
+			END {
+				days    = int(secs / 3600)
+				hours   = int((secs - days * 3600) / 60)
+				minutes = secs % 60
+				printf "%02d:%02d\n", hours, minutes }
+				' sum.log)
+			printf "$d\t$new_t\n" >> last.log
+			extra=0
+		else
+			printf "$d\t$same_time\n" >> last.log
+		fi
+	fi
+done < usage.log
+
+# Removes some used files
+[ -f sum.log ] && rm sum.log
+[ -f hours_corrected.log ] && rm hours_corrected.log
+
+# Removes most used files
+rm usage.log hours.log dates.log complete.log days_corrected.log days_sorted.log hours_sorted.log dates_corrected.log
+
+hour_jump=2
+
+# Finally, process the plotting
+[ ! "$filename" == "-" ] && gnuplot "$filename" ||
+	gnuplot << EOF
+		set terminal png size ${size} enhanced font "Comfortaa,16"
+		set output 'last.png'
+
+		set style data histogram
+		set style histogram cluster gap 2
+		set style fill solid
+		set boxwidth 0.9
+		set grid ytics
+		set xlabel "Days"
+		set xtics font "Comfortaa,8" rotate by -90
+
+		set timefmt "%H:%M"
+		set yrange ["00:00":"24:00"]
+		set format y "%H h"
+		set xdata time
+		set ytics ${hour_jump}
+		set timefmt "%d/%m"
+		set format x "%d/%m"
+		set ylabel "Hours"
+
+		set title "Time usage per day on Linux"
+		plot "last.log" using (column(0) * 1.5) : 2 : xtic(1) with boxes notitle, "last.log" using (column(0)*1.5):(column(2)+1):(column(2)) with labels notitle
+EOF
+
+rm last.log

@@ -81,7 +81,7 @@ exec='alacritty'
 
 [desktop/background]
 color-shading-type='solid'
-picture-filename='/home/lucas/wallpaper/starry_night-improved.png'
+picture-filename='~/wallpaper/starry_night-improved.png'
 picture-options='zoom'
 primary-color='rgb(255,255,255)'
 secondary-color='rgb(0,0,0)'
@@ -127,6 +127,11 @@ action='xprop -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY 0xff0000
 binding='<Shift>F12'
 name='Disable second-mode translucency.'
 
+[desktop/keybindings/custom5]
+action='bin/logout.sh'
+binding='<Mod4>l'
+name='Launch logout menu screen'
+
 [desktop/peripherals/keyboard]
 numlock-state='off'
 
@@ -149,16 +154,15 @@ cursor-theme='deepin'
 
 [desktop/session]
 idle-delay=120
-session-start=1691006971
 show-hidden-apps=true
 
 [desktop/session/required-components]
 windowmanager='marco-no-composite'
 
 [desktop/sound]
-event-sounds=false
+event-sounds=true
 input-feedback-sounds=true
-theme-name='__no_sounds'
+theme-name='freedesktop'
 
 [dictionary]
 database='!'
@@ -227,12 +231,12 @@ monospace-font-name='Monospace 16'
 window-scaling-factor=0
 
 [keybindings/custom0]
-action='/home/lucas/.config/rofi/launcher/launcher.sh'
+action='~/.config/rofi/launcher/launcher.sh'
 binding='<Alt>F1'
 name='Launch customized application launcher'
 
 [keybindings/custom1]
-action='spectacle'
+action='mate-screenshot'
 binding='Print'
 name='Custom screenshot taker'
 
@@ -396,8 +400,6 @@ default-window-width=554
 contains-the-text=true
 
 [session]
-auto-save-session=false
-session-start=1634414234
 show-hidden-apps=true
 
 [session/required-components]
