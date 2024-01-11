@@ -16,9 +16,10 @@ Global Menu: \
    
    `cd ~/.cache/yay/vala-panel-appmenu/ `
 
-   Edit in the **PKGBUILD** file setting the following:
-   ```
+   Edit in the **PKGBUILD** file setting the following: \
    _disable_xfce=false to true
+   ```
+   _disable_xfce=true
    _disable_vala=true
    _disable_budgie=true
    ```
@@ -49,11 +50,8 @@ River-theme: \
    
    Icon theme: \
       First, download the Tela-circle-black.tar.xz in Files(13) on the link:
-      https://www.gnome-look.org/p/1359276/
-
-      And create if it does not exist.
-      
-      `mkdir ~/.icons/ `
+      https://www.gnome-look.org/p/1359276/ \
+      And create if it does not exist. (`mkdir ~/.icons/ `)
 
       ```
       mv ~/Downloads/Tela-circle-black.tar.xz ~/.icons/ 
@@ -105,7 +103,7 @@ Logout-screen: \
    pacman -S python-pip 
    pip install pyqt5 
    cp -r logout-screen/ ~/.config/ 
-   mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ \
+   mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ 
    rm -rf ~/.local/share/logout-screen/dev/ 
    ```
    
