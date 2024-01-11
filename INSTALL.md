@@ -53,14 +53,12 @@ River-theme: \
       https://www.gnome-look.org/p/1359276/ \
       And create if it does not exist. (`mkdir ~/.icons/ `)
 
-      ```
       mv ~/Downloads/Tela-circle-black.tar.xz ~/.icons/ 
       cd ~/.icons/ 
       tar -xf Tela-circle-black.tar.xz 
       rm -rf Tela-circle-black.tar.xz 
       sudo cp -r ~/.icons/Tela-circle-black /usr/share/icons/ 
       cd ~/dotfiles 
-      ```
 
    Cursor theme: \
       I use _Deepin_ Dark cursor theme, please look at the [extra-deps/extra-pkgs.txt](https://github.com/Firespindash/dotfiles/blob/main/extra-deps/extra-pkgs.txt) file.
