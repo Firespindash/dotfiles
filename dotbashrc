@@ -97,6 +97,7 @@ if ${use_color} ; then
 		# PROMPT_COMMAND=timer_stop
 		# PS1='$timer_show > '
 		function git_prompt {
+			local branch status
 			$(git rev-parse --is-inside-work-tree &>/dev/null) && {
 			 branch=$(git describe --contains --all);
 			 if [ $(git stash list --no-decorate | wc -l) -gt 0 ]
