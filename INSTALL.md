@@ -100,9 +100,8 @@ Logout-screen: \
    ```
    pacman -S python-pip 
    pip install pyqt5 
-   cp -r logout-screen/ ~/.config/ 
-   mv ~/.config/logout-screen/share/ ~/.local/share/logout-screen/ 
-   rm -rf ~/.local/share/logout-screen/dev/ 
+   mv logout-screen/share/ ~/.local/share/logout-screen/ 
+   rm -rf logout-screen/ ~/.local/share/logout-screen/dev/ 
    ```
    
 _Eww_: \
