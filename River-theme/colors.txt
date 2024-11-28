@@ -1,0 +1,28 @@
+Background - #2e3440 (from Nord)
+Foreground - #f2f2f2 (from Akava)
+Bright_White - #fafaf6 
+White - #eceff4 (from Nord)
+Bright_Blue - #76abc7
+Blue - #88c0d0 (from Nord)
+Bright_Cyan - #63aeba
+Cyan - #61a7ac
+Bright_Teal - #50b0ac
+Teal - #3b8d88
+Bright_Green - #a3be8c (from Nord)
+Green - #69af89
+Bright_Yellow - #edca60
+Yellow - #ebcb8b (from Nord)
+Bright_Orange - #f99468
+Orange - #f1b476
+Bright_Red - #ee7777
+Red - #bf616a (from Nord)
+Bright_Pink - #c8637e
+Pink - #c14e6e
+Bright_Magenta - #b2739c
+Magenta - #a3578b
+Bright_Purple - #9b82b9
+Purple - #8561a7
+Bright_Gray - #798187
+Gray - #5d626e
+Bright_Black - #2c2c2c (from Akava)
+Black - #191919

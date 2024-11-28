@@ -1,0 +1,46 @@
+Xft.dpi: 96
+Xft.antialias: 1
+Xft.hinting: 1
+Xft.rgba: rgb
+Xft.autohint: 0
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+st.font: FontForge Raize:pixelsize=17
+st.borderpx: 0
+st.alpha: 0.6
+
+*background: #2e3440
+*foreground: #f2f2f2
+
+! Black + DarkGrey
+*color0: #191919
+*color8: #2c2c2c
+
+! DarkRed + Red
+*color1: #bf616a
+*color9: #ee7777
+
+! DarkGreen + Green
+*color2: #69af89
+*color10: #a3be8c
+
+! DarkYellow + Yellow
+*color3: #ebcb8b
+*color11: #edca60
+
+! DarkBlue + Blue
+*color4: #88c0d0
+*color12: #76abc7
+
+! DarkMagenta + Magenta
+*color5: #8561a7
+*color13: #9b82b9
+
+! DarkCyan + Cyan
+*color6: #3b8d88
+*color14: #50b0ac
+
+! LightGrey + White
+*color7: #fafaf6
+*color15: #eceff4

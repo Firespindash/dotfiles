@@ -4,7 +4,7 @@
 
 .blurredBG.notification { 
 	background: rgba(46, 52, 64, 0.6); 
-	border-radius: 5px; 
+	border-radius: 0px; 
 } 
 
 #img_img { 
